@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FormComponent } from './components/form/form.component';
 import { FormsModule } from '@angular/forms';
 import { MuralComponent } from './components/mural/mural.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MuralComponent } from './components/mural/mural.component';
     HeaderComponent,
     FooterComponent,
     FormComponent,
-    MuralComponent
+    MuralComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

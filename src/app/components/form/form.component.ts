@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-form',
@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './form.component.css'
 })
 
-export class FormComponent {
+export class FormComponent implements OnInit {
   
   pensamento = {
     id: '1',
@@ -14,6 +14,8 @@ export class FormComponent {
     autoria: 'Dev',
     modelo:''
   }
+
+  ngOnInit(): void {}
 
   save() {
     alert("Teste")
