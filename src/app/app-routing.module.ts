@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './components/form/form.component';
 import { MuralComponent } from './components/mural/mural.component';
+import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
+import { UpdateModalComponent } from './components/update-modal/update-modal.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,15 @@ const routes: Routes = [
   {
     path: 'mural',
     component: MuralComponent
-  }
+  },
+  {
+    path: 'delete-modal/:id',
+    component: DeleteModalComponent
+  },
+  {
+    path: 'update-modal/:id',
+    component: UpdateModalComponent
+  },
 ];
 
 @NgModule({

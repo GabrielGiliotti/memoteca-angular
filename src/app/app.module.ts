@@ -9,6 +9,9 @@ import { FormComponent } from './components/form/form.component';
 import { FormsModule } from '@angular/forms';
 import { MuralComponent } from './components/mural/mural.component';
 import { CardComponent } from './components/card/card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UpdateModalComponent } from './components/update-modal/update-modal.component';
+import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,15 @@ import { CardComponent } from './components/card/card.component';
     FooterComponent,
     FormComponent,
     MuralComponent,
-    CardComponent
+    CardComponent,
+    DeleteModalComponent,
+    UpdateModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

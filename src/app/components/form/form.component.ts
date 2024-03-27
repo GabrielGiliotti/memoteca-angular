@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CardObject } from '../../interfaces/card-object';
+import { CardService } from '../../services/card.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -8,16 +11,22 @@ import { Component, OnInit } from '@angular/core';
 
 export class FormComponent implements OnInit {
   
-  pensamento = {
-    id: '1',
-    conteudo: 'Aprendendo Angular',
-    autoria: 'Dev',
-    modelo:''
+  pensamento: CardObject = {
+    conteudo: '',
+    autoria: '',
+    modelo: 'modelo1'
   }
+
+  constructor(
+    private cardService: CardService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   save() {
-    alert("Teste")
+    this.cardService.create(this.pensamento).subscribe(() => {
+      this.router.navigate(['mural']);
+    });
   }
 }

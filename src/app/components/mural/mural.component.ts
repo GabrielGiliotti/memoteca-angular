@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CardObject } from '../../interfaces/card-object';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-mural',
@@ -8,23 +10,13 @@ import { Component, OnInit } from '@angular/core';
 
 export class MuralComponent implements OnInit {
 
-  list = [
-    {
-      conteudo: 'Comunicacao entre components',
-      autoria: 'Gabriel',
-      modelo: 'modelo2'
-    },
-    {
-      conteudo: 'Comunicacao entre components 2',
-      autoria: 'Gabriel',
-      modelo: 'modelo1'
-    },
-    {
-      conteudo: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget rhoncus nisl. Morbi egestas neque nisi, nec vehicula augue consectetur at. Cras gravida accumsan sapien, in volutpat orci suscipit ac. Suspendisse id sapien finibus, condimentum urna non, sollicitudin velit. Aenean in enim molestie, tincidunt magna quis, tempor leo',
-      autoria: 'Angular',
-      modelo: 'modelo3'
-    }
-  ];
+  list: CardObject[] = [];
 
-  ngOnInit(): void {}
+  constructor(private cardService: CardService) {}
+
+  ngOnInit(): void {
+    this.cardService.get().subscribe((list) => {
+      this.list = list;
+    });
+  }
 }
