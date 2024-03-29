@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CardObject } from '../../interfaces/card-object';
 import { CardService } from '../../services/card.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-modal',
@@ -11,32 +11,38 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class UpdateModalComponent implements OnInit {
 
-  pensamento: CardObject = {
-    id: 0,
-    conteudo: '',
-    autoria: '',
-    modelo: ''
-  }
+  form!: FormGroup;
 
   constructor(
     private cardService: CardService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
+
     const id = this.route.snapshot.paramMap.get('id');
     
     this.cardService.getById(parseInt(id!)).subscribe(card => {
-      this.pensamento = card;
+      this.form = this.formBuilder.group({
+        id: [card.id],
+        conteudo: [card.conteudo, Validators.compose([
+          Validators.required,
+          Validators.pattern(/(.|\s)*\S(.|\s)*/)
+        ])],
+        autoria: [card.autoria, Validators.compose([
+          Validators.required,
+          Validators.minLength(3)
+        ])],
+        modelo: [card.modelo]
+      })
     });
   }
 
   updateCard() {
-    if(this.pensamento.id) {
-      this.cardService.update(this.pensamento).subscribe(() => {
-        this.router.navigate(['/mural']);
-      });
-    }
+    this.cardService.update(this.form.value).subscribe(() => {
+      this.router.navigate(['/mural']);
+    });    
   }
 }
