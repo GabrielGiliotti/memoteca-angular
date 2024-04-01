@@ -20,11 +20,15 @@ export class CardService {
     return this.client.get<CardObject[]>(this.URL);
   }
 
-  getPaged(page: number, limit: number) : Observable<CardObject[]> {
+  getPaged(page: number, limit: number, filter: string) : Observable<CardObject[]> {
     
     let params = new HttpParams()
       .set("_page", page)
       .set("_limit", limit);
+
+    if(filter.trim().length > 2) {
+      params = params.set("q", filter);
+    }
 
     return this.client.get<CardObject[]>(this.URL, { params });
   }
