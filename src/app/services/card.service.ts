@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CardObject } from '../interfaces/card-object';
 import { Observable } from 'rxjs';
@@ -18,6 +18,15 @@ export class CardService {
 
   get() : Observable<CardObject[]> {
     return this.client.get<CardObject[]>(this.URL);
+  }
+
+  getPaged(page: number, limit: number) : Observable<CardObject[]> {
+    
+    let params = new HttpParams()
+      .set("_page", page)
+      .set("_limit", limit);
+
+    return this.client.get<CardObject[]>(this.URL, { params });
   }
 
   getById(id: number): Observable<CardObject> {

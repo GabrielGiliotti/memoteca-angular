@@ -12,6 +12,7 @@ import { CardComponent } from './components/card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateModalComponent } from './components/update-modal/update-modal.component';
 import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
+import { CardLoaderComponent } from './components/card-loader/card-loader.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DeleteModalComponent } from './components/delete-modal/delete-modal.com
     MuralComponent,
     CardComponent,
     DeleteModalComponent,
-    UpdateModalComponent
+    UpdateModalComponent,
+    CardLoaderComponent
   ],
   imports: [
     BrowserModule,

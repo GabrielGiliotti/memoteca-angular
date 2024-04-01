@@ -1,0 +1,6 @@
+<div class="center" *ngIf="hasData; else dataLoaded">
+    <button class="botao carregar-mais">Carregar mais</button>
+</div>
+<ng-template #dataLoaded>
+    <p class="mensagem-center ff-inter">Não há mais dados para serem exibidos</p>
+</ng-template>

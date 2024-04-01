@@ -9,6 +9,7 @@
         </div>
     </div>
 </section>
+<app-card-loader [hasData]="hasData" (click)="loadData()"></app-card-loader>
 <ng-template #semPensamentos>
     <div class="ff-inter sem-pensamentos">
         <p>Não há pensamentos cadastrados!</p>
