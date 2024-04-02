@@ -20,7 +20,7 @@ export class CardService {
     return this.client.get<CardObject[]>(this.URL);
   }
 
-  getPaged(page: number, limit: number, filter: string) : Observable<CardObject[]> {
+  getPaged(page: number, limit: number, filter: string, favoritos: boolean) : Observable<CardObject[]> {
     
     let params = new HttpParams()
       .set("_page", page)
@@ -28,6 +28,10 @@ export class CardService {
 
     if(filter.trim().length > 2) {
       params = params.set("q", filter);
+    }
+
+    if(favoritos) {
+      params = params.set("favorito", true);
     }
 
     return this.client.get<CardObject[]>(this.URL, { params });
