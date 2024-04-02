@@ -46,5 +46,10 @@ export class CardService {
   delete(id: number) : Observable<CardObject> {
     const url = `${this.URL}/${id}`;
     return this.client.delete<CardObject>(url);
-  } 
+  }
+
+  changeFavorite(card: CardObject) : Observable<CardObject> {
+    card.favorito = !card.favorito;
+    return this.update(card);
+  }
 }

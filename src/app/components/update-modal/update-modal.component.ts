@@ -35,7 +35,8 @@ export class UpdateModalComponent implements OnInit {
           Validators.required,
           Validators.minLength(3)
         ])],
-        modelo: [card.modelo]
+        modelo: [card.modelo],
+        favorito: [card.favorito]
       })
     });
   }

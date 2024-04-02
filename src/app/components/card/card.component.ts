@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CardObject } from '../../interfaces/card-object';
+import { CardService } from '../../services/card.service';
 
 @Component({
   selector: 'app-card',
@@ -13,8 +14,11 @@ export class CardComponent implements OnInit {
     id: 0,
     conteudo: 'Default',
     autoria: 'DEV',
-    modelo: 'modelo1'
+    modelo: 'modelo1',
+    favorito: false
   };
+
+  constructor(private cardService: CardService) {}
 
   ngOnInit(): void {}
 
@@ -23,6 +27,17 @@ export class CardComponent implements OnInit {
       return 'pensamento-g';
     }
     return 'pensamento-p';
+  }
+
+  changeFavoriteStatusIcon() : string {
+    if(this.pensamento.favorito) {
+      return 'ativo';
+    }
+    return 'inativo';
+  }
+
+  updateFavorite() {
+    this.cardService.changeFavorite(this.pensamento).subscribe();
   }
 
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CardObject } from '../../interfaces/card-object';
 import { CardService } from '../../services/card.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +23,8 @@ export class FormComponent implements OnInit {
     this.form = this.formBuilder.group({
       conteudo: ['', Validators.compose([Validators.required, Validators.pattern(/(.|\s)*\S(.|\s)*/)])],
       autoria: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      modelo: ['modelo1']
+      modelo: ['modelo1'],
+      favorito: [false]
     });
   }
 
