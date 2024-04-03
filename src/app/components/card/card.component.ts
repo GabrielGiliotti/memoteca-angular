@@ -18,6 +18,8 @@ export class CardComponent implements OnInit {
     favorito: false
   };
 
+  @Input() favoriteList: CardObject[] = [];
+
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {}
@@ -37,7 +39,9 @@ export class CardComponent implements OnInit {
   }
 
   updateFavorite() {
-    this.cardService.changeFavorite(this.pensamento).subscribe();
+    this.cardService.changeFavorite(this.pensamento).subscribe(() => {
+      this.favoriteList.splice(this.favoriteList.indexOf(this.pensamento), 1);
+    });
   }
 
 }

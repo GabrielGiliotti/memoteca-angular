@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardObject } from '../../interfaces/card-object';
 import { CardService } from '../../services/card.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mural',
@@ -17,8 +18,11 @@ export class MuralComponent implements OnInit {
   filter: string = '';
   currentPage: number = 1;
   favoritos: boolean = false;
+  favoriteList: CardObject[] = [];
+  titulo: string = 'Meu Mural';
 
-  constructor(private cardService: CardService) {}
+  constructor(private cardService: CardService, 
+              private router: Router ) {}
 
   ngOnInit(): void {
     this.cardService.getPaged(this.page, this.limit, this.filter, this.favoritos).subscribe((list) => {
@@ -31,8 +35,16 @@ export class MuralComponent implements OnInit {
       this.list.push(...list);
       if(!list.length) {
         this.hasData = false;
+        this.page = 1;
       }
     })
+  }
+
+  reload() {
+    this.page = 1;
+    this.favoritos = false;
+    this.currentPage = 1;
+    this.router.navigate([this.router.url]);
   }
 
   filterCards() {
@@ -47,6 +59,7 @@ export class MuralComponent implements OnInit {
   }
 
   listFavorites() {
+    this.titulo = 'Meus Favoritos';
     this.hasData = true;
     this.currentPage = 1;
     this.limit = 2;
@@ -54,6 +67,7 @@ export class MuralComponent implements OnInit {
 
     this.cardService.getPaged(this.currentPage, this.limit, this.filter, this.favoritos).subscribe(list => {
       this.list = list;
+      this.favoriteList = list; 
     });
   }
 }

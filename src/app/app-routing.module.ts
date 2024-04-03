@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './components/form/form.component';
 import { MuralComponent } from './components/mural/mural.component';
 import { DeleteModalComponent } from './components/delete-modal/delete-modal.component';
 import { UpdateModalComponent } from './components/update-modal/update-modal.component';
+import { CustomReuseStrategy } from './routing/custom-reuse-strategy';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'create-item',
+    redirectTo: 'mural',
     pathMatch: 'full'
   },
   {
@@ -17,7 +18,10 @@ const routes: Routes = [
   },
   {
     path: 'mural',
-    component: MuralComponent
+    component: MuralComponent,
+    data: {
+      reuseComponent: true
+    }
   },
   {
     path: 'delete-modal/:id',
@@ -30,7 +34,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'})],
+  exports: [RouterModule],
+  providers: [{provide: RouteReuseStrategy, useClass: CustomReuseStrategy}]
 })
 export class AppRoutingModule { }
